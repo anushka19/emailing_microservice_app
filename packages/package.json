@@ -1,0 +1,16 @@
+{
+  "name": "packages",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "core-util-is": "^1.0.2"
+  },
+  "devDependencies": {},
+  "description": ""
+}
