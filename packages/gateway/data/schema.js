@@ -1,13 +1,13 @@
 const {
   ApolloServer,
-  makeExecutableSchema
-} = require('apollo-server');
+  gql
+} = require('apollo-server-express');
 
 const resolvers =require ('./resolvers');
 
 
 // syntax : type Query { hey: String! }
-const typeDefs =`
+const typeDefs =gql`
   type Query {
     mails :[Mail]
     mail(subject: String!, receiver: String!): Mail
@@ -25,9 +25,9 @@ const typeDefs =`
   }
 `;
 
-const schema = makeExecutableSchema({
+/*const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
-});
+});*/
 
-module.exports = makeExecutableSchema ( { typeDefs , resolvers}) ;
+module.exports = new ApolloServer ( { typeDefs , resolvers}) ;

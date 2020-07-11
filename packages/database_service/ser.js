@@ -5,21 +5,21 @@
 //const{ makeExecutableSchema }= require('graphql-tools')
 
 const express = require('express');
+const config = require('./config');
+ 
 
-const {
-    ApolloServer,
-    gql
-} = require('apollo-server-express');
-
-const schema= require('./data/schema');
+const {port}= config;
 const app = express();
-const {port} = require('./config');
 
 
-schema.applyMiddleware({app});
-//app.use(express.json());
+//schema.applyMiddleware({app});
+app.use(express.json());
+
+require('./db_utils')(config);
+require('./routes/get')(app);
+
 app.listen({ port: port }, () =>
-  console.log(`🚀 Server ready at http://localhost: ${port}`));
+  console.log(`🚀 Server ready at http://localhost: 4000`));
 
 
 

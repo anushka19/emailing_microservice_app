@@ -25,6 +25,15 @@ const mockMails=[
 
 module.exports = {
      Query : {
-        mails : () => mockMails
-     }
+        mails : () => mockMails,
+        mail: (_,args) => mockMails[0]
+     },
+     Mutation:{
+        mail: (_,args)=> {
+            mockMails[0]= args;
+
+            return args;
+        
+        }
+    }
  };
