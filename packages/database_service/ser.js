@@ -17,9 +17,10 @@ app.use(express.json());
 
 require('./db_utils')(config);
 require('./routes/get')(app);
+require('./routes/post')(app);
 
 app.listen({ port: port }, () =>
-  console.log(`🚀 Server ready at http://localhost: 4000`));
+  console.log(`🚀 Server ready at http://localhost:4000`));
 
 
 

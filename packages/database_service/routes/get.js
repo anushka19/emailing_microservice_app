@@ -1,16 +1,48 @@
 const mongoose = require('mongoose');
-const mailSchema = require('../db_utils/Models/Mail');
+//const mailSchema = require('../db_utils/Models/Mail');
 const Mail = mongoose.model('Mail');
 
-module.exports=server => {
-    server.get('/',async(_,res)=> {
-        const m= new Mail({
-            subject: 'Hello Subj',
-            receiver:'test@test.com',
-            content:'Hello cpntent'
-        });
-        await m.save();
+const pingHandler = (_,res) => {
+    res.send('Healthy');
+}
 
-        res.send('worked');
+const mailHandler = async(_,res) => {
+    let mails;
+    let error;
+
+    try{
+        mails = await Mail.find();
+    }
+    catch(err){
+        error=err;
+    }
+    res.send({
+        message: 'Got response from DB',
+        service: 'Database Service',
+        status: 200,
+        payload: mails || error
     });
+};
+const singleMailHandler= async({ params:{id}}, res) => {
+    let mail;
+    let error;
+
+    try {
+        mail = await Mail.findOne({_id: id});
+    } catch(err){
+        error=err;
+    }
+
+    res.send({
+        message: 'Got response from DB',
+        service: 'Database Service',
+        status: 200,
+        payload: mails || error
+    });
+};
+module.exports=server => {
+    server
+    .get('/',pingHandler)
+    .get('/mails',mailHandler)
+    .get ('/mails/:id',singleMailHandler);
 };
