@@ -1,4 +1,4 @@
-//const server =require('express');
+const server =require('express');
 //const{ graphqlExpress,graphiqlExpress} = require ('apollo-server');
 //const bodyParser = require('body-parser')
 //const { ApolloServer, gql } = require('apollo-server-express');
@@ -12,8 +12,9 @@ const {
 } = require('apollo-server-express');
 
 const schema= require('./data/schema');
-const app = express();
 const {port} = require('./config');
+const app = express();
+
 
 
 schema.applyMiddleware({app});

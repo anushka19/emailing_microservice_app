@@ -1,16 +1,16 @@
+const express= require('express');
 const {
   ApolloServer,
   gql
 } = require('apollo-server-express');
-
 const resolvers =require ('./resolvers');
 
 
-// syntax : type Query { hey: String! }
+// syntax : type Query { hey: String! } ,,,, mail(subject: String!, receiver: String!): Mail
 const typeDefs =gql`
   type Query {
     mails :[Mail]
-    mail(subject: String!, receiver: String!): Mail
+    mail(id:String!): Mail
   }
 
   type Mutation{

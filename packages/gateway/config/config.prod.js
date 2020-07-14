@@ -1,7 +1,8 @@
-const { graphql } = require("graphql");
+//const { graphql } = require("graphql");
 
 const{ PORT }= process.env;
 
 module.exports= {
-    port : PORT || 3100
+    port : PORT || 3000,
+    
 };

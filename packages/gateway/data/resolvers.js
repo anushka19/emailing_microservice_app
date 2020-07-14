@@ -3,7 +3,7 @@
     receiver: String
     content: String
     _id: String
-}*/
+}
 
 const mockMails=[
     {
@@ -21,19 +21,43 @@ const mockMails=[
         receiver: 'test@test.com',
         content:'Hello world'
     }
-];
+];*/
+const {
+    ApolloServer,
+    gql
+  } = require('apollo-server-express');
+
+
+const axios =require('axios');
+const {serviceDatabase :{ port }} =require('../config');
+
+const hostname ='http://localhost';
+const databaseURL = `${hostname}: ${port}`;
+
+const get = async path => (await axios.get(`${databaseURL}/${path}`)).data.payload;
+/*
+const getMails=async () => {
+    const mails=(await axios.get(`${databseURL}mails`)).data.payload;
+    return mails;
+};
+
+const getSingleMail = async id => {
+    const mail = (await axios.get(`${databseURL}mails/${id}`)).data.payload;
+    return mail;
+} */
+
+ const postSingleMail = async body => {
+     const postedMail = (await axios.post(`${databseURL}mails`, {...body})).data.payload;
+
+     return postedMail;
+ };
 
 module.exports = {
      Query : {
-        mails : () => mockMails,
-        mail: (_,args) => mockMails[0]
+        mails : () => get('mails'),
+        mail: (_,{ id } ) => get(`mail/${id}`)
      },
      Mutation:{
-        mail: (_,args)=> {
-            mockMails[0]= args;
-
-            return args;
-        
-        }
+        mail: (_,args)=> postSingleMail(args)
     }
  };

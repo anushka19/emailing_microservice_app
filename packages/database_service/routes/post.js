@@ -23,7 +23,7 @@ const MailHandler=async ({ body:{ subject, receiver , content}},  res) => {
     });
 
     try{
-        mail= await mail.save();
+        mail= await newmail.save();
     }catch(err){
             error=err;
         }

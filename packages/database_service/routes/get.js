@@ -23,7 +23,7 @@ const mailHandler = async(_,res) => {
         payload: mails || error
     });
 };
-const singleMailHandler= async({ params:{id}}, res) => {
+const singleMailHandler= async({ params : { id } } , res ) => {
     let mail;
     let error;
 
@@ -37,7 +37,7 @@ const singleMailHandler= async({ params:{id}}, res) => {
         message: 'Got response from DB',
         service: 'Database Service',
         status: 200,
-        payload: mails || error
+        payload: mail || error
     });
 };
 module.exports=server => {
