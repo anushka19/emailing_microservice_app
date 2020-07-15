@@ -32,9 +32,10 @@ const axios =require('axios');
 const {serviceDatabase :{ port }} =require('../config');
 
 const hostname ='http://localhost';
-const databaseURL = `${hostname}: ${port}`;
+const databaseURL = `${hostname}:${port}`;
 
 const get = async path => (await axios.get(`${databaseURL}/${path}`)).data.payload;
+
 /*
 const getMails=async () => {
     const mails=(await axios.get(`${databseURL}mails`)).data.payload;
@@ -44,13 +45,16 @@ const getMails=async () => {
 const getSingleMail = async id => {
     const mail = (await axios.get(`${databseURL}mails/${id}`)).data.payload;
     return mail;
-} */
+}    const postSingleMail = async body => {
+        const postedMail = (await axios.post(`${databseURL}mails`, {...body})).data.payload;
 
- const postSingleMail = async body => {
-     const postedMail = (await axios.post(`${databseURL}mails`, {...body})).data.payload;
+        return postedMail;
+    };*/
 
-     return postedMail;
- };
+const post = async (path,body) => 
+(await axios.post(`${databaseURL}/${path}`,{...body })).data.payload;
+
+ 
 
 module.exports = {
      Query : {
@@ -58,6 +62,6 @@ module.exports = {
         mail: (_,{ id } ) => get(`mail/${id}`)
      },
      Mutation:{
-        mail: (_,args)=> postSingleMail(args)
+        mail: (_,args)=>post('mails',args)
     }
  };
